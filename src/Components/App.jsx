@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
+
 // -----
 // import css from './App.module.css'
 import SearchBox from './SearchBox/SearchBox'
@@ -9,9 +11,18 @@ import initialData from './ContactsData/ContactsData.json'
 
 
 export default function App() {
-
-    const [initial, setInitial] = useState(initialData)
+    const [initial, setInitial] = useState(() => {
+        const storageData = JSON.parse(localStorage.getItem('contacts'))
+        if (storageData) {
+            return storageData
+        }
+        return initialData
+    })
     const [search, setSearch] = useState('')
+
+    useEffect(() => {
+        localStorage.setItem("contacts", JSON.stringify(initial))
+    }, [initial])
 
     function addContact(data) {
         setInitial((prevVersion) => {
@@ -30,7 +41,7 @@ export default function App() {
     return (
         <div>
             <h1>Phonebook</h1>
-            <ContactForm addContact={addContact}/>
+            <ContactForm addContact={addContact} />
             <SearchBox
             inputValue={search}
             doSearch={setSearch}
