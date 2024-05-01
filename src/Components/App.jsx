@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 // -----
-// import css from './App.module.css'
+import css from './App.module.css'
 import SearchBox from './SearchBox/SearchBox'
 import ContactForm from './ContactForm/ContactForm'
 import ContactList from './ContactList/ContactList'
@@ -40,16 +40,19 @@ export default function App() {
 
     return (
         <div>
+        <div className={css.main}>
             <h1>Phonebook</h1>
-            <ContactForm addContact={addContact} />
+                <ContactForm addContact={addContact} />
             <SearchBox
             inputValue={search}
             doSearch={setSearch}
-            />
+                />
+        </div>
             <ContactList
                 initial={visibleContacts}
                 deleteC={deleteContact}
-            />
+                />
+            
         </div>
     )
 }

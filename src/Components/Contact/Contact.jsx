@@ -12,7 +12,7 @@ export default function Contact({ userName, userNumber, id, deleteC }) {
                 <li>{userName}</li>
                 <li>{userNumber}</li>
             </ul>
-            <button onClick={deleteHandler}>Delete</button>
+            <button className={css.btn} onClick={deleteHandler}>Delete</button>
         </div>
     )
 }
